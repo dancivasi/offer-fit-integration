@@ -15,6 +15,12 @@ def get_all_events():
         return all_events
 
 
+# Option 2, we leave the code as is BUT, you need to know that when main.py is imported
+# all_events will be computed and assigned so the main file will actually have main["all_events"] = ...
+# Thus in the test we need to reload the import so that the mocking can take place
+# with open('events.json', 'r') as file:
+#     all_events = json.loads(file.read())
+
 @app.get('/events/{customer_id}')
 def events_for_customer_id(customer_id: int, all_events: List[dict] = Depends(get_all_events)):
     customer_events = []

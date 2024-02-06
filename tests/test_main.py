@@ -8,6 +8,8 @@ client = TestClient(app)
 
 @pytest.fixture
 def mock_open_file():
+    # Option 2 do a importlib.reload(main) before patching
+
     # Doar am pus un singur event sa vezi ca merge mocking-ul
     with patch('builtins.open', new_callable=mock_open, read_data='''[
         {"customer_id": 123, "event_type": "email_click", "timestamp": "2023-10-23T14:30:00", "email_id": 1234,

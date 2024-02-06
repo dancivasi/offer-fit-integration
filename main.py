@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Response, status
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 import json
 
 
@@ -8,16 +9,16 @@ with open('events.json', 'r') as file:
     all_events = json.loads(file.read())
 
 
-@app.get('/events/{customer_id}', status_code=200)
-def events_for_customer_id(customer_id: int, response: Response):
+@app.get('/events/{customer_id}')
+def events_for_customer_id(customer_id: int):
     customer_events = []
     for event in all_events:
         if event['customer_id'] == customer_id:
             customer_events.append(event)
-    if customer_events == []:
-        print("am ajuns aiciaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-        response.status_code = status.HTTP_204_NO_CONTENT
-        print("am ajuns aicibbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb")
-        return response.status_code
+    if not customer_events:
+        return JSONResponse(
+            status_code=204,
+            content={"message": "No events for the event provided"}
+        )
     else:
         return customer_events

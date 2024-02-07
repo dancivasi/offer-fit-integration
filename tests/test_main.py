@@ -1,29 +1,38 @@
 import pytest
 from fastapi.testclient import TestClient
+from unittest.mock import patch, mock_open
 from main import app
 
 client = TestClient(app)
 
+@pytest.fixture
+def mock_open_file():
+    # Option 2 do a importlib.reload(main) before patching
 
-def test_get_email_events_with_valid_customer_id():
-    response = client.get("/get_email_events/123")
+    # Doar am pus un singur event sa vezi ca merge mocking-ul
+    with patch('builtins.open', new_callable=mock_open, read_data='''[
+        {"customer_id": 123, "event_type": "email_click", "timestamp": "2023-10-23T14:30:00", "email_id": 1234,
+         "clicked_link": "https://example.com/some-link"}
+    ]'''):
+        yield
+
+
+def test_get_event_with_valid_customer_id(mock_open_file):
+    response = client.get("/events/123")
     assert response.status_code == 200
-    assert len(response.json()) == 2
+    assert response.json() == [
+        {
+            "customer_id": 123,
+            "event_type": "email_click",
+            "timestamp": "2023-10-23T14:30:00",
+            "email_id": 1234,
+            "clicked_link": "https://example.com/some-link"
+        }
+    ]
 
 
-def test_get_email_events_with_invalid_customer_id():
-    response = client.get("/get_email_events/999")
-    assert response.status_code == 200
-    assert response.json() == {'message': 'No email events found for the provided customer_id'}
+def test_get_event_with_invalid_customer_id(mock_open_file):
+    response = client.get("/events/999")
+    assert response.status_code == 204
+    assert response.json() == {'message': 'No events for the event provided'}
 
-
-def test_get_email_events_with_time_range():
-    response = client.get("/get_email_events/123?start_time=2023-10-23T14:00:00&end_time=2023-10-24T12:00:00")
-    assert response.status_code == 200
-    assert len(response.json()) == 1
-
-
-def test_get_email_events_with_invalid_time_range():
-    response = client.get("/get_email_events/123?start_time=2023-10-25T00:00:00&end_time=2023-10-26T00:00:00")
-    assert response.status_code == 200
-    assert response.json() == {'message': 'No email events found for the provided customer_id'}

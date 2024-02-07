@@ -1,37 +1,37 @@
-from fastapi import FastAPI, Query
-from typing import Optional
-from pydantic import BaseModel
+from typing import List
+
+from fastapi import FastAPI, Depends
+from fastapi.responses import JSONResponse
 import json
+
 
 app = FastAPI()
 
-with open('events.json', 'r') as file:
-    events = file.read()
 
-all_events = json.loads(events)
-
-
-class EmailEvent(BaseModel):
-    customer_id: int
-    event_type: str
-    timestamp: str
+# Option 1, make it a function which is not called at load time
+def get_all_events():
+    with open('events.json', 'r') as file:
+        all_events = json.loads(file.read())
+        return all_events
 
 
-@app.get('/get_email_events/{customer_id}')
-def get_email_events_for_customer_id(customer_id: int,
-                                     start_time: Optional[str] = Query(None,
-                                                                       description="Start timestamp for filtering"),
-                                     end_time: Optional[str] = Query(None,
-                                                                     description="End timestamp for filtering")
-                                     ):
-    filtered_events = [
-        EmailEvent(**event) for event in all_events
-        if event['customer_id'] == customer_id
-           and (start_time is None or event['timestamp'] >= start_time)
-           and (end_time is None or event['timestamp'] <= end_time)
-    ]
+# Option 2, we leave the code as is BUT, you need to know that when main.py is imported
+# all_events will be computed and assigned so the main file will actually have main["all_events"] = ...
+# Thus in the test we need to reload the import so that the mocking can take place
+# with open('events.json', 'r') as file:
+#     all_events = json.loads(file.read())
 
-    if not filtered_events:
-        return {'message': 'No email events found for the provided customer_id'}
+@app.get('/events/{customer_id}')
+def events_for_customer_id(customer_id: int, all_events: List[dict] = Depends(get_all_events)):
+    customer_events = []
+    for event in all_events:
+        if event['customer_id'] == customer_id:
+            customer_events.append(event)
+    if not customer_events:
+        return JSONResponse(
+            status_code=204,
+            content={"message": "No events for the event provided"}
+        )
     else:
-        return filtered_events
+        return customer_events
+

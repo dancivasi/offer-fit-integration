@@ -1,6 +1,271 @@
 [
-{"customer_id": 123, "event_type": "email_click", "timestamp": "2023-10-23T14:30:00", "email_id": 1234, "clicked_link": "https://example.com/some-link"},
-{"customer_id": 456, "event_type": "email_open", "timestamp": "2023-10-24T11:30:00", "email_id": 998},
-{"customer_id": 456, "event_type": "email_unsubscribe", "timestamp": "2023-10-24T11:30:25", "email_id": 998},
-{"customer_id": 123, "event_type": "purchase", "timestamp": "25-10-2023T15:33:00", "email_id": 1234, "product_id": 357, "amount": 49.99}
+    {
+        "customer_id": 101,
+        "event_type": "email_open",
+        "timestamp": "2023-11-01T08:00:00",
+        "email_id": 111
+    },
+    {
+        "customer_id": 101,
+        "event_type": "email_click",
+        "timestamp": "2023-11-01T08:30:00",
+        "email_id": 111,
+        "clicked_link": "https://example.com/link-1"
+    },
+    {
+        "customer_id": 202,
+        "event_type": "purchase",
+        "timestamp": "2023-11-02T12:30:00",
+        "email_id": 222,
+        "product_id": 333,
+        "amount": 39.99
+    },
+    {
+        "customer_id": 202,
+        "event_type": "email_open",
+        "timestamp": "2023-11-02T13:00:00",
+        "email_id": 222
+    },
+    {
+        "customer_id": 303,
+        "event_type": "email_click",
+        "timestamp": "2023-11-03T15:45:00",
+        "email_id": 333,
+        "clicked_link": "https://example.com/link-2"
+    },
+    {
+        "customer_id": 303,
+        "event_type": "email_unsubscribe",
+        "timestamp": "2023-11-03T16:15:00",
+        "email_id": 333
+    },
+    {
+        "customer_id": 404,
+        "event_type": "email_open",
+        "timestamp": "2023-11-04T10:20:00",
+        "email_id": 444
+    },
+    {
+        "customer_id": 404,
+        "event_type": "purchase",
+        "timestamp": "2023-11-04T10:50:00",
+        "email_id": 444,
+        "product_id": 555,
+        "amount": 49.99
+    },
+    {
+        "customer_id": 505,
+        "event_type": "email_unsubscribe",
+        "timestamp": "2023-11-05T11:55:00",
+        "email_id": 666
+    },
+    {
+        "customer_id": 505,
+        "event_type": "email_click",
+        "timestamp": "2023-11-05T12:25:00",
+        "email_id": 666,
+        "clicked_link": "https://example.com/link-3"
+    },
+    {
+        "customer_id": 606,
+        "event_type": "purchase",
+        "timestamp": "2023-11-06T14:10:00",
+        "email_id": 777,
+        "product_id": 888,
+        "amount": 29.99
+    },
+    {
+        "customer_id": 606,
+        "event_type": "email_open",
+        "timestamp": "2023-11-06T14:40:00",
+        "email_id": 777
+    },
+    {
+        "customer_id": 707,
+        "event_type": "email_click",
+        "timestamp": "2023-11-07T18:30:00",
+        "email_id": 888,
+        "clicked_link": "https://example.com/link-4"
+    },
+    {
+        "customer_id": 707,
+        "event_type": "email_open",
+        "timestamp": "2023-11-07T19:00:00",
+        "email_id": 888
+    },
+    {
+        "customer_id": 808,
+        "event_type": "email_unsubscribe",
+        "timestamp": "2023-11-08T09:25:00",
+        "email_id": 999
+    },
+    {
+        "customer_id": 808,
+        "event_type": "email_click",
+        "timestamp": "2023-11-08T09:55:00",
+        "email_id": 999,
+        "clicked_link": "https://example.com/link-5"
+    },
+    {
+        "customer_id": 909,
+        "event_type": "purchase",
+        "timestamp": "2023-11-09T13:40:00",
+        "email_id": 1010,
+        "product_id": 1111,
+        "amount": 39.99
+    },
+    {
+        "customer_id": 909,
+        "event_type": "email_open",
+        "timestamp": "2023-11-09T14:10:00",
+        "email_id": 1010
+    },
+    {
+        "customer_id": 1010,
+        "event_type": "email_click",
+        "timestamp": "2023-11-10T16:55:00",
+        "email_id": 1111,
+        "clicked_link": "https://example.com/link-6"
+    },
+    {
+        "customer_id": 1010,
+        "event_type": "purchase",
+        "timestamp": "2023-11-10T17:25:00",
+        "email_id": 1111,
+        "product_id": 1212,
+        "amount": 49.99
+    },
+    {
+        "customer_id": 1111,
+        "event_type": "email_open",
+        "timestamp": "2023-11-11T11:15:00",
+        "email_id": 1212
+    },
+    {
+        "customer_id": 1111,
+        "event_type": "email_unsubscribe",
+        "timestamp": "2023-11-11T11:45:00",
+        "email_id": 1212
+    },
+    {
+        "customer_id": 1212,
+        "event_type": "email_click",
+        "timestamp": "2023-11-12T10:05:00",
+        "email_id": 1313,
+        "clicked_link": "https://example.com/link-7"
+    },
+    {
+        "customer_id": 1212,
+        "event_type": "email_open",
+        "timestamp": "2023-11-12T10:35:00",
+        "email_id": 1313
+    },
+    {
+        "customer_id": 1313,
+        "event_type": "email_click",
+        "timestamp": "2023-11-13T14:20:00",
+        "email_id": 1414,
+        "clicked_link": "https://example.com/link-8"
+    },
+    {
+        "customer_id": 1313,
+        "event_type": "purchase",
+        "timestamp": "2023-11-13T14:50:00",
+        "email_id": 1414,
+        "product_id": 1515,
+        "amount": 59.99
+    },
+    {
+        "customer_id": 1414,
+        "event_type": "email_open",
+        "timestamp": "2023-11-14T17:35:00",
+        "email_id": 1515
+    },
+    {
+        "customer_id": 1414,
+        "event_type": "email_unsubscribe",
+        "timestamp": "2023-11-14T18:05:00",
+        "email_id": 1515
+    },
+    {
+        "customer_id": 1515,
+        "event_type": "email_click",
+        "timestamp": "2023-11-15T08:50:00",
+        "email_id": 1616,
+        "clicked_link": "https://example.com/link-9"
+    },
+    {
+        "customer_id": 1515,
+        "event_type": "email_open",
+        "timestamp": "2023-11-15T09:20:00",
+        "email_id": 1616
+    },
+    {
+        "customer_id": 1616,
+        "event_type": "email_click",
+        "timestamp": "2023-11-16T12:05:00",
+        "email_id": 1717,
+        "clicked_link": "https://example.com/link-10"
+    },
+    {
+        "customer_id": 1616,
+        "event_type": "purchase",
+        "timestamp": "2023-11-16T12:35:00",
+        "email_id": 1717,
+        "product_id": 1818,
+        "amount": 69.99
+    },
+    {
+        "customer_id": 1717,
+        "event_type": "email_open",
+        "timestamp": "2023-11-17T15:20:00",
+        "email_id": 1818
+    },
+    {
+        "customer_id": 1717,
+        "event_type": "email_click",
+        "timestamp": "2023-11-17T15:50:00",
+        "email_id": 1818,
+        "clicked_link": "https://example.com/link-11"
+    },
+    {
+        "customer_id": 1818,
+        "event_type": "purchase",
+        "timestamp": "2023-11-18T18:05:00",
+        "email_id": 1919,
+        "product_id": 2020,
+        "amount": 79.99
+    },
+    {
+        "customer_id": 1818,
+        "event_type": "email_open",
+        "timestamp": "2023-11-18T18:35:00",
+        "email_id": 1919
+    },
+    {
+        "customer_id": 1919,
+        "event_type": "email_click",
+        "timestamp": "2023-11-19T08:50:00",
+        "email_id": 2020,
+        "clicked_link": "https://example.com/link-12"
+    },
+    {
+        "customer_id": 1919,
+        "event_type": "email_unsubscribe",
+        "timestamp": "2023-11-19T09:20:00",
+        "email_id": 2020
+    },
+    {
+        "customer_id": 2020,
+        "event_type": "email_open",
+        "timestamp": "2023-11-20T12:05:00",
+        "email_id": 2121
+    },
+    {
+        "customer_id": 2020,
+        "event_type": "email_click",
+        "timestamp": "2023-11-20T12:35:00",
+        "email_id": 2121,
+        "clicked_link": "https://example.com/link-13"
+    }
 ]
